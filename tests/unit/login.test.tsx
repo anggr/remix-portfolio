@@ -2,6 +2,20 @@ import { test, expect, vi } from "vitest";
 import { render, fireEvent, screen } from "@testing-library/react";
 import Login from "../../app/routes/login";
 
+
+
+
+vi.mock("~/session.server", () => ({
+  getSession: async () => null,
+  getUserId: async () => null,
+  getUser: async () => null,
+  requireUserId: async () => null,
+  requireUser: async () => null,
+  requireAdminUser: async () => null,
+  createUserSession: async () => null,
+  logout: async () => null,
+}));
+
 // Mock the session.server module
 vi.mock("~/models/user.server", () => ({
   getUserById: async () => null,
