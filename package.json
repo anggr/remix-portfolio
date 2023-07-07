@@ -17,8 +17,9 @@
     "postinstall": "prisma generate",
     "typecheck": "tsc -b",
     "validate": "run-p lint typecheck",
-    "test:e2e": "playwright test tests/e2e", 
-  "test:unit": "vitest tests/unit" 
+    "test:e2e": "playwright test tests/e2e",
+    "test:unit": "vitest tests/unit",
+    "test:integration": "vitest tests/integration"
   },
   "eslintIgnore": [
     "/node_modules",
@@ -31,9 +32,11 @@
     "@remix-run/react": "^1.6.7",
     "@remix-run/serve": "^1.6.7",
     "@remix-run/server-runtime": "^1.6.7",
+    "@testing-library/user-event": "^14.4.3",
     "bcryptjs": "^2.4.3",
     "date-fns": "^2.30.0",
     "marked": "^4.0.18",
+    "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tiny-invariant": "^1.2.0"
@@ -54,6 +57,7 @@
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "happy-dom": "^10.0.3",
+    "node-mocks-http": "^1.12.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.14",
     "prettier": "2.7.1",
