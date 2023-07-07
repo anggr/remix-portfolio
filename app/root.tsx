@@ -5,14 +5,16 @@ import {
   LiveReload,
   Meta,
   Outlet,
-  // Scripts,
   ScrollRestoration,
-  // useLoaderData,
 } from "@remix-run/react";
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import { getUser } from "./session.server";
 import { getEnv } from "./env.server";
+import store from '../store/store'; // adjust this import path to match your file structure
+import { persistStore } from 'redux-persist';
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
@@ -31,8 +33,9 @@ export async function loader({ request }: LoaderArgs) {
   });
 }
 
+let persistor = persistStore(store);
+
 export default function App() {
-  // const data = useLoaderData<typeof loader>();
   return (
     <html lang="en" className="h-full">
       <head>
@@ -40,7 +43,11 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Outlet />
+          </PersistGate>
+        </Provider>
         <ScrollRestoration />
 
         <LiveReload />
